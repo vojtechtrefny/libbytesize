@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: "Dockerfile"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: prep
+        run: ansible-playbook -i "localhost," -c local misc/install-test-dependencies.yml
+      - name: make
+        run: |
+          ./autogen.sh
+          ./configure
+          make
+      - name: test
+        run: make test
