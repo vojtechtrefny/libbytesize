@@ -282,6 +282,7 @@ static bool multiply_size_by_unit (mpfr_t size, char *unit_str) {
 static void set_error (BSError **error, BSErrorCode code, char *msg) {
     *error = (BSError *) malloc (sizeof(BSError));
     if (*error == NULL) {
+        (*error)->msg = msg;
         free (msg);
         return;
     }
