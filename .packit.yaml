@@ -20,6 +20,13 @@ jobs:
     - epel-9-ppc64le
     - epel-9-x86_64
   trigger: pull_request
+
+- job: copr_build
+  trigger: commit
+  owner: vtrefny
+  project: test
+  branch: master_packit-rpmbuilds-test
+
 srpm_build_deps:
  - make
  - gcc
